@@ -1,8 +1,18 @@
 <ui:composition
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-        template="/templates/template_base.xhtml">
-    <ui:define name="base_body">
-        <h1>Hola mundo</h1>
+        xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+        template="/templates/template_app.xhtml">
+    <ui:define name="content_body">
+        <div style="display: grid; gap: 2rem">
+            <ui:repeat value="#{indexCtrl.allProjects}" var="project">
+                <p:outputPanel rendered="#{requestCtrl.existParam('visible_code', project.visibleCode)}"
+                               style="background: red">
+                    <h:outputText value="#{appTemplateCtrl.getKeyword(project.nameKeyword)}"/>
+                    <h:outputText value="#{appTemplateCtrl.getKeyword(project.aboutKeyword)}"/>
+                    <p:commandButton value="#{appTemplateCtrl.getKeyword('read_more')}" actionListener="#{appTemplateCtrl.navigateRouteProject(project)}"/>
+                </p:outputPanel>
+            </ui:repeat>
+        </div>
     </ui:define>
 </ui:composition>

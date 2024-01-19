@@ -1,0 +1,123 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:h="http://java.sun.com/jsf/html"
+        template="/templates/template_admin.xhtml">
+    <ui:define name="content_body">
+        <div class="container">
+            <h:form id="form_data" styleClass="card">
+                <div class="title-card">
+                    <div class="title-card-icon-text">
+                        <i class="pi pi-globe"/>
+                        <span>#{bundle.language}</span>
+                    </div>
+                    <div>
+                        <p:commandButton actionListener="#{languageCtrl.preCreateOrEdit(null)}"
+                                         update="create" oncomplete="PF('create_wv').show()"
+                                         icon="pi pi-plus" value="#{bundle.add}"/>
+                    </div>
+                </div>
+                <div class="content-card">
+                    <div style="overflow-x: auto">
+                        <p:dataTable tableStyle="min-width: 60rem !important;"
+                                     value="#{languageCtrl.allLanguages}" var="lang" styleClass="custom-table"
+                                     paginator="true" paginatorPosition="bottom" rows="10">
+                            <p:column field="id" width="8rem">
+                                <p:badge value="#{lang.id}">
+                                    <p:avatar icon="#{lang.icon} fis" size="xlarge"/>
+                                </p:badge>
+                            </p:column>
+                            <p:column headerText="#{bundle.name}" field="name"/>
+                            <p:column headerText="#{bundle.description}" field="description"/>
+                            <p:column headerText="#{bundle.controls}" width="10rem">
+                                <p:commandLink styleClass="command-link" value="#{bundle.edit}"
+                                                 actionListener="#{languageCtrl.preCreateOrEdit(lang)}"
+                                                 update="edit" oncomplete="PF('edit_wv').show()"/>
+                                <p:commandLink styleClass="command-link" value="#{bundle.remove}"
+                                                 actionListener="#{languageCtrl.remove(lang)}" update="form_data">
+                                    <p:confirm header="#{bundle.confirmation}" message="#{bundle.confirm_delete}" icon="pi pi-info-circle"/>
+                                </p:commandLink>
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+
+        <h:form id="create">
+            <p:dialog styleClass="custom-dialog" widgetVar="create_wv" header="#{bundle.create_item}"
+                      closable="false" resizable="false" draggable="false" blockScroll="true" modal="true">
+                <div style="display: grid; max-height: 50vh">
+                    <div class="input-group" style="margin-bottom: 2rem">
+                        <p:outputLabel for="@next" value="#{bundle.name}"/>
+                        <p:inputText value="#{languageCtrl.current.name}"/>
+                    </div>
+                    <div class="input-group" style="margin-bottom: 2rem">
+                        <p:outputLabel for="@next" value="#{bundle.icon}"/>
+                        <p:inputText value="#{languageCtrl.current.icon}"/>
+                    </div>
+                    <div class="input-group">
+                        <p:outputLabel for="@next" value="#{bundle.description}"/>
+                        <p:inputText value="#{languageCtrl.current.description}"/>
+                    </div>
+                    <div class="input-group" style="margin: 1rem 0">
+                        <div class="custom-badge-firing" style="padding: 1rem; display: grid">
+                            <span style="font-weight: bold; text-transform: uppercase">#{bundle.icon_definition}</span>
+                            <span>
+                                <h:outputText escape="false" value="#{bundle.icon_definition_description}"/>
+                            </span>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: flex-end; gap: 1rem">
+                        <p:commandButton styleClass="ui-button-secondary" value="#{bundle.cancel}"
+                                         oncomplete="PF('create_wv').hide()"/>
+                        <p:commandButton value="#{bundle.accept}" actionListener="#{languageCtrl.create()}"
+                                         update="form_data" oncomplete="PF('create_wv').hide()"/>
+                    </div>
+                </div>
+            </p:dialog>
+        </h:form>
+
+        <h:form id="edit">
+            <p:dialog styleClass="custom-dialog" widgetVar="edit_wv" header="#{bundle.edit_item}"
+                      closable="false" resizable="false" draggable="false" blockScroll="true" modal="true">
+                <div style="display: grid; max-height: 50vh">
+                    <div class="input-group" style="margin-bottom: 2rem">
+                        <p:outputLabel for="@next" value="#{bundle.name}"/>
+                        <p:inputText value="#{languageCtrl.current.name}"/>
+                    </div>
+                    <div class="input-group" style="margin-bottom: 2rem">
+                        <p:outputLabel for="@next" value="#{bundle.icon}"/>
+                        <p:inputText value="#{languageCtrl.current.icon}"/>
+                    </div>
+                    <div class="input-group">
+                        <p:outputLabel for="@next" value="#{bundle.description}"/>
+                        <p:inputText value="#{languageCtrl.current.description}"/>
+                    </div>
+                    <div class="input-group" style="margin: 1rem 0">
+                        <div class="custom-badge-firing" style="padding: 1rem; display: grid">
+                            <span style="font-weight: bold; text-transform: uppercase">#{bundle.icon_definition}</span>
+                            <span>
+                                <h:outputText escape="false" value="#{bundle.icon_definition_description}"/>
+                            </span>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: flex-end; gap: 1rem">
+                        <p:commandButton styleClass="ui-button-secondary" value="#{bundle.cancel}"
+                                         oncomplete="PF('edit_wv').hide()"/>
+                        <p:commandButton value="#{bundle.accept}" actionListener="#{languageCtrl.update()}"
+                                         update="form_data" oncomplete="PF('edit_wv').hide()"/>
+                    </div>
+                </div>
+            </p:dialog>
+        </h:form>
+
+        <h:form>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="custom-dialog">
+                <p:commandButton value="#{bundle.cancel}" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+                <p:commandButton value="#{bundle.accept}" type="button" styleClass="ui-confirmdialog-yes" />
+            </p:confirmDialog>
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mimsoft</groupId>
-    <artifactId>Boilerplate</artifactId>
+    <artifactId>Manuales</artifactId>
     <version>1.0</version>
-    <name>Boilerplate</name>
+    <name>Manuales</name>
     <packaging>war</packaging>
 
     <properties>
@@ -27,6 +27,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
             <version>4.4</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>

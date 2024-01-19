@@ -70,8 +70,9 @@
 
 :root {
     --toolbar-height: 4.5rem;
-    --toolbar-bg: var(--surface-ground);
+    --toolbar-bg: var(--surface-a);
     --navigator-drawer-content-width: 20rem;
+    --navigator-drawer-icon-color: var(--text-color);
     --overlay-transparent: rgba(0, 0, 0, 0.3);
 }
 
@@ -84,4 +85,229 @@
 
 * :not(.pi) {
     font-family: "Open-Sans", sans-serif !important;
+}
+
+body {
+    height: auto !important;
+    display: grid !important;
+    background: var(--surface-ground);
+}
+
+#header {
+    position: fixed;
+    width: 100%;
+    height: var(--toolbar-height);
+    background: var(--toolbar-bg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    z-index: 999;
+}
+
+#navigation_drawer {
+    position: fixed;
+    left: calc(-1 * var(--navigator-drawer-content-width));
+    top: var(--toolbar-height);
+    height: calc(100vh - var(--toolbar-height));
+    width: var(--navigator-drawer-content-width);
+    background: var(--toolbar-bg);
+    transition: 200ms;
+    z-index: 9999;
+}
+
+.active_navigation_drawer {
+    transform: translateX(var(--navigator-drawer-content-width));
+    transition: 200ms;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.left .menu {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    padding: 0;
+    width: calc(var(--toolbar-height) * 0.6);
+}
+
+.left svg {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.left .line {
+    fill: none;
+    stroke: var(--navigator-drawer-icon-color);
+    stroke-width: 6;
+    transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.left .line1 {
+    stroke-dasharray: 60 207;
+    stroke-width: 6;
+}
+
+.left .line2 {
+    stroke-dasharray: 60 60;
+    stroke-width: 6;
+}
+
+.left .line3 {
+    stroke-dasharray: 60 207;
+    stroke-width: 6;
+}
+
+.left .opened .line1 {
+    stroke-dasharray: 90 207;
+    stroke-dashoffset: -134;
+    stroke-width: 6;
+}
+
+.left .opened .line2 {
+    stroke-dasharray: 1 60;
+    stroke-dashoffset: -30;
+    stroke-width: 6;
+}
+
+.left .opened .line3 {
+    stroke-dasharray: 90 207;
+    stroke-dashoffset: -134;
+    stroke-width: 6;
+}
+
+/* ReWrite Exist Css */
+.ui-menubar {
+    border: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+}
+
+.ui-menu-parent .ui-menu-list {
+    background: var(--surface-ground) !important;
+    box-shadow: none !important;
+    border: 1px solid var(--surface-border) !important;
+}
+
+.ui-accordion-header {
+    background: transparent !important;
+}
+
+* > [role='tabpanel'] {
+    background: transparent !important;
+}
+
+.container {
+    width: calc(100% - 4rem);
+    margin: 2rem;
+    position: absolute;
+}
+
+.card {
+    background: var(--surface-card) !important;
+}
+
+.title-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.content-card {
+    margin-top: 1rem;
+}
+
+.title-card-icon-text {
+    font-weight: bold;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+}
+
+.title-card-icon-text i {
+    font-size: 1.5rem;
+}
+
+.btn-bolder {
+    text-transform: uppercase !important;
+}
+
+.custom-table thead th,
+.custom-table .ui-paginator,
+.custom-table .ui-datatable-data tr,
+.custom-table .ui-datatable-data tr td,
+.custom-table .ui-datatable-empty-message,
+.custom-table .ui-datatable-empty-message td {
+    background: transparent !important;
+    border: none !important;
+}
+
+.custom-dialog .ui-dialog-titlebar,
+.custom-dialog .ui-dialog-content,
+.custom-dialog .ui-dialog-footer {
+    background: var(--surface-card) !important;
+}
+
+.ui-selectonemenu {
+    width: 100% !important;
+}
+
+.custom-badge {
+    border-radius: 2px;
+    padding: 0.25em 0.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.3px;
+}
+.custom-badge-successful, .custom-badge-sent {
+    background-color: #b3e5fc;
+    color: #23547b;
+}
+.custom-badge-error, .custom-badge-received {
+    background-color: #ffcdd2;
+    color: #c63737;
+}
+.custom-badge-firing {
+    background-color: #feedaf;
+    color: #8a5340;
+}
+.custom-badge-read {
+    background-color: #c8e6c9;
+    color: #256029;
+}
+.custom-badge-delivered {
+    background-color: #eccfff;
+    color: #694382;
+}
+.custom-badge-resolved {
+    background-color: #ffd8b2;
+    color: #805b36;
+}
+
+.fis {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.ui-staticmessage {
+    width: 100%;
+    margin-left: 0 !important;
+    border-radius: 0 !important;
+}
+
+.command-link {
+    margin: 0 0.5rem;
 }

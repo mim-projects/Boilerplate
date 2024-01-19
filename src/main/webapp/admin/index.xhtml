@@ -1,0 +1,55 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:h="http://java.sun.com/jsf/html"
+        template="/templates/template.xhtml">
+    <ui:define name="template_head">
+        <style>
+            .content-login {
+                position: absolute;
+                width: 100%;
+                height: 60rem;
+                max-height: 100vh;
+                background: var(--surface-ground);
+                display: grid;
+                grid-template-rows: var(--toolbar-height) 1fr;
+            }
+            .content-login .return {
+                display: flex;
+                align-items: center;
+                margin: 0 2rem;
+            }
+            .content-login .form {
+                margin: auto;
+            }
+            .form {
+                display: grid;
+                width: calc(100% - 4rem);
+                max-width: 30rem;
+                padding-bottom: var(--toolbar-height);
+            }
+        </style>
+    </ui:define>
+    <ui:define name="template_body">
+        <div class="content-login">
+            <div class="return">
+                <p:commandButton style="scale: 1.5!important;" styleClass="ui-button-flat" process="@this"
+                                 icon="pi pi-arrow-left" actionListener="#{routerCtrl.navigate('home')}"/>
+            </div>
+            <h:form style="display: flex">
+                <div class="form">
+                    <div class="field">
+                        <p:outputLabel for="@next" value="#{appTemplateCtrl.getKeyword('username')}"/>
+                        <p:inputText style="width: 100%" value="#{loginCtrl.username}"/>
+                    </div>
+                    <div class="field">
+                        <p:outputLabel for="@next" value="#{appTemplateCtrl.getKeyword('password')}"/>
+                        <p:password style="width: 100%" value="#{loginCtrl.password}"/>
+                    </div>
+                    <p:commandButton value="#{appTemplateCtrl.getKeyword('login')}" style="width: 100%" actionListener="#{loginCtrl.login()}"/>
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

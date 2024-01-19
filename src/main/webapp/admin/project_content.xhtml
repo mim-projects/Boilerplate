@@ -1,0 +1,91 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        template="/templates/template_admin.xhtml">
+    <ui:define name="end_head">
+        <h:outputScript library="mimsoft" name="/js/custom-editor.js"/>
+        <h:outputStylesheet library="mimsoft" name="/css/custom-editor.css"/>
+    </ui:define>
+    <ui:define name="content_body">
+        <div class="container">
+            <h:form id="form_data" styleClass="card" rendered="#{not empty projectContentCtrl.currentProject}">
+                <div class="title-card">
+                    <div class="title-card-icon-text">
+                        <i class="pi pi-slack"/>
+                        <span style="text-transform: uppercase">#{projectContentCtrl.currentProject.contentKeyword} :: #{bundle.project_content}</span>
+                    </div>
+                    <div>
+                        <p:commandButton icon="pi pi-save" value="#{bundle.save}" actionListener="#{projectContentCtrl.save()}">
+                            <p:confirm header="#{bundle.confirmation}" message="#{bundle.confirm_save}" icon="pi pi-info-circle"/>
+                        </p:commandButton>
+                    </div>
+                </div>
+                <div class="content-card">
+                    <p:outputPanel id="menu" style="overflow-x: auto">
+                        <ui:repeat value="#{projectContentCtrl.contentArray}" var="project" varStatus="status">
+                            <p:commandButton style="text-transform: uppercase" actionListener="#{projectContentCtrl.updateIndex(status.index)}"
+                                             styleClass="#{projectContentCtrl.currentIndex eq status.index ?'' :'ui-button-flat'}"
+                                             update="@form" value="#{project.languageId.name}" icon="#{project.languageId.icon}"/>
+                        </ui:repeat>
+                    </p:outputPanel>
+                    <div style="margin-top: 1rem">
+                        <p:textEditor widgetVar="editor" secure="false"
+                                      value="#{projectContentCtrl.contentArray[projectContentCtrl.currentIndex].value}">
+                            <f:facet name="toolbar">
+                                <span class="ql-formats">
+                                    <button class="ql-bold"></button>
+                                    <button class="ql-italic"></button>
+                                    <button class="ql-underline"></button>
+                                    <button class="ql-strike"></button>
+                                </span>
+                                <span class="ql-formats">
+                                    <button class="ql-header" value="1"></button>
+                                    <button class="ql-header" value="2"></button>
+                                    <button class="ql-blockquote"></button>
+                                    <button class="ql-code-block"></button>
+                                    <button class="ql-clean"></button>
+                                </span>
+                                <span class="ql-formats">
+                                    <select class="ql-color"></select>
+                                    <select class="ql-background"></select>
+                                </span>
+                                <span class="ql-formats">
+                                    <button class="ql-script" value="sub"></button>
+                                    <button class="ql-script" value="super"></button>
+                                </span>
+                                <span class="ql-formats">
+                                    <button class="ql-list" value="ordered"></button>
+                                    <button class="ql-list" value="bullet"></button>
+                                    <button class="ql-indent" value="-1"></button>
+                                    <button class="ql-indent" value="+1"></button>
+                                </span>
+                                <span class="ql-formats">
+                                    <button class="ql-direction" value="rtl"></button>
+                                    <select class="ql-align"></select>
+                                </span>
+                                <span class="ql-formats">
+                                    <button class="ql-link"></button>
+                                    <button class="ql-image"></button>
+                                    <button class="ql-video"></button>
+                                </span>
+                                <span class="ql-formats">
+                                    <button id="custom-button" type="button"/>
+                                </span>
+                            </f:facet>
+                        </p:textEditor>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+
+        <h:form>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+                <p:commandButton value="#{bundle.cancel}" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+                <p:commandButton value="#{bundle.accept}" type="button" styleClass="ui-confirmdialog-yes" />
+            </p:confirmDialog>
+        </h:form>
+    </ui:define>
+</ui:composition>

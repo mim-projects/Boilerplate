@@ -1,0 +1,54 @@
+.input-group {
+    display: grid;
+}
+
+.custom-dialog, .custom-dialog-top {
+    width: calc(100% - 4rem) !important;
+    max-width: 45rem !important;
+}
+
+.custom-dialog .ui-dialog-content, .custom-dialog-top .ui-dialog-content {
+    max-height: 84vh !important;
+}
+
+.custom-dialog-top {
+    top: 2rem !important;
+}
+
+table button {
+    text-align: left !important;
+}
+
+.card {
+    margin-bottom: 2rem !important;
+ }
+
+.change_image_overlay {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: 200ms;
+}
+
+.change_image_overlay:hover {
+    opacity: 1;
+}
+
+.change_image_overlay input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.change_image_overlay i {
+    color: var(--toolbar-bg) !important;
+    font-size: 1.5rem !important;
+}

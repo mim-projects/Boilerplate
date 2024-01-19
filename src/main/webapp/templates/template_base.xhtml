@@ -1,35 +1,47 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-<h:head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/101784088"/>
-    <title>#{bundle.app_name}</title>
-    <!-- THEME  -->
-    <h:outputStylesheet name="css/primeflex.min.css" library="poseidon-layout" />
-    <h:outputStylesheet name="css/primeicons.css" library="poseidon-layout" />
-    <h:outputStylesheet name="theme.css" library="primefaces-poseidon-cyan-dark"/>
-    <h:outputStylesheet name="css/layout-dark.css" library="poseidon-layout"/>
-    <!-- PERSONAL THEME  -->
-    <h:outputStylesheet name="css/custom-theme.css" library="mimsoft" />
-    <h:outputScript name="js/custom-theme.js" library="mimsoft" />
-    <ui:insert name="base_head"/>
-</h:head>
-<h:body>
-    <h:form id="messages" style="z-index: 999999999">
-        <p:growl showDetail="true"/>
-    </h:form>
-    <ui:insert name="base_body"/>
-    <script type="text/javascript">
-        PrimeFaces.widget.Paginator.prototype.bindSwipeEvents = function() {}
-        PrimeFaces.widget.TabView.prototype.bindSwipeEvents = function() {}
-    </script>
-</h:body>
-</html>
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        template="template.xhtml">
+    <ui:define name="template_head">
+        <ui:insert name="base_head"/>
+    </ui:define>
+    <ui:define name="template_body">
+        <h:form id="messages" style="z-index: 999999999">
+            <p:growl showDetail="true"/>
+        </h:form>
+        <ui:insert name="start_body"/>
+        <div id="navigation_drawer">
+            <ui:insert name="navigation_drawer_content"/>
+        </div>
+        <div id="application">
+            <div id="header">
+                <div class="left">
+                    <button id="navigation_button" class="menu" aria-label="Main Menu">
+                        <svg width="100" height="100" viewBox="0 0 100 100">
+                            <path class="line line1" d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
+                            <path class="line line2" d="M 20,50 H 80" />
+                            <path class="line line3" d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
+                        </svg>
+                    </button>
+                    <ui:insert name="header_left"/>
+                </div>
+                <div class="center">
+                    <ui:insert name="header_center"/>
+                </div>
+                <div class="right">
+                    <ui:insert name="header_right"/>
+                </div>
+            </div>
+            <div class="main">
+                <h:form>
+                    <ui:insert name="remotes"/>
+                </h:form>
+                <ui:insert name="base_content_body"/>
+            </div>
+            <div class="footer"></div>
+            <ui:insert name="base_end_body"/>
+        </div>
+    </ui:define>
+</ui:composition>
