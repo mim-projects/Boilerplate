@@ -1,6 +1,5 @@
 package com.mimsoft.manuales.bootstrap;
 
-import com.mimsoft.manuales.application.controllers.api.ImageController;
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
 
@@ -17,7 +16,6 @@ public class Bootstrap extends Application {
     }
 
     private void addApiResourceClasses(Set<Class<?>> resources) {
-        resources.add(ImageController.class);
     }
 
     private void addWebResourceClasses(Set<Class<?>> resources) {
