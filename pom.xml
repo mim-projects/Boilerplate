@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mimsoft</groupId>
-    <artifactId>Manuales</artifactId>
+    <artifactId>Boilerplate</artifactId>
     <version>1.0</version>
-    <name>Manuales</name>
+    <name>Boilerplate</name>
     <packaging>war</packaging>
 
     <properties>

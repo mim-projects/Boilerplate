@@ -12,10 +12,16 @@
     </welcome-file-list>
 
     <error-page>
-        <error-code>404</error-code>
-        <location>/_error/_404.xhtml</location>
+        <exception-type>jakarta.faces.application.ViewExpiredException</exception-type>
+        <location>/index.xhtml</location>
     </error-page>
+
     <error-page>
-        <location>/_error/index.xhtml</location>
+        <error-code>404</error-code>
+        <location>/error/_404.xhtml</location>
+    </error-page>
+
+    <error-page>
+        <location>/error/_all_codes.xhtml</location>
     </error-page>
 </web-app>
